@@ -13,10 +13,7 @@
   --accent: #f0c14b;            /* primary chalk-yellow accent */
   --accent-soft: #f3d27a;
   --accent-deep: #c99a2e;       /* for use on light backgrounds, better contrast */
-  --chalk-yellow: #f0c14b;
-  --chalk-yellow-soft: #f3d27a;
   --sky-chalk: #82b6d9;
-  --sky-chalk-deep: #4f87ab;
   --ink: #1c2b33;
   --ink-soft: #4a5b63;
   --line: rgba(28, 43, 51, 0.12);
@@ -62,7 +59,7 @@ a {
 .wrap {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 16px;
 }
 
 /* ============================================
@@ -242,11 +239,11 @@ a {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: start;
-  padding-top: 88px;
-  padding-bottom: 64px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 24px;
 }
 
 .hero h1 {
@@ -316,6 +313,7 @@ a {
 .hero-visual {
   position: relative;
   aspect-ratio: 4/5;
+  max-height: calc(100vh - var(--header-h) - 80px);
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(245, 241, 232, 0.18);
@@ -325,7 +323,7 @@ a {
 .hero-visual img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .hero-visual-frame {
