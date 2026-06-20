@@ -1,0 +1,252 @@
+/* ============================================
+   TEAM PAGE
+   Scrapbook-style cards in a normal scrolling
+   grid. Click a card's photo to open a modal
+   with the full card image. The "Meet The Team"
+   intro gets a paparazzi-flash treatment: camera
+   flashes pop in and out over the text, lighting
+   up nearby letters as they go.
+   ============================================ */
+
+/* ---------- Paparazzi flash intro ---------- */
+
+.team-intro {
+  position: relative;
+  padding: calc(var(--header-h) + 56px) 0 64px;
+  text-align: center;
+  background: var(--slate-deep);
+  color: var(--chalk-white);
+  overflow: hidden;
+}
+
+/* Sits exactly over the text area and never affects the section's
+   size — flashes are absolutely positioned within this layer, so
+   however many fire, the section's height never changes. */
+.team-flash-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.team-flash {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 35%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transform: scale(0.4);
+  mix-blend-mode: screen;
+}
+
+.team-flash.is-popping {
+  animation: team-flash-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes team-flash-pop {
+  0% { opacity: 0; transform: scale(0.3); }
+  16% { opacity: 1; transform: scale(1.15); }
+  38% { opacity: 0.85; transform: scale(0.95); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+.team-intro-copy {
+  position: relative;
+  z-index: 1;
+}
+
+/* Each letter of the headline gets its own span, lit briefly yellow
+   when a nearby flash pops, like it caught the light. */
+.team-intro-letter {
+  display: inline-block;
+  transition: color 0.15s ease, transform 0.15s ease, text-shadow 0.15s ease;
+}
+
+.team-intro-letter.is-lit {
+  color: var(--accent);
+  transform: translateY(-3px);
+  text-shadow: 0 0 16px rgba(240, 193, 75, 0.6);
+}
+
+.team-intro .section-eyebrow {
+  justify-content: center;
+  color: var(--accent-soft);
+}
+
+.team-intro h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.6vw, 56px);
+  font-weight: 600;
+  margin: 16px 0 18px;
+}
+
+.team-intro p {
+  font-size: 17px;
+  color: rgba(245, 241, 232, 0.75);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.team-intro-highlight {
+  position: relative;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- Team grid (real content, crawlable) ---------- */
+
+.team-grid-section {
+  padding: 72px 0 96px;
+}
+
+.team-batch-heading {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 52px 0 22px;
+}
+
+.team-batch-heading:first-child {
+  margin-top: 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 28px;
+}
+
+.team-grid-card {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.22s ease;
+}
+
+.team-grid-card:hover {
+  transform: translateY(-8px) rotate(1deg);
+}
+
+.team-grid-card-scrapbook {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 6px 22px rgba(22, 49, 63, 0.18);
+  transition: box-shadow 0.22s ease;
+}
+
+.team-grid-card:hover .team-grid-card-scrapbook {
+  box-shadow: 0 18px 42px rgba(22, 49, 63, 0.3);
+}
+
+.team-grid-card h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 12px;
+}
+
+/* ---------- Card preview modal ---------- */
+
+.team-card-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.team-card-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.team-card-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 27, 34, 0.82);
+}
+
+.team-card-modal-content {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 100%);
+  transform: scale(0.93) translateY(10px);
+  transition: transform 0.25s ease;
+}
+
+.team-card-modal.is-open .team-card-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.team-card-modal-content img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  display: block;
+}
+
+.team-card-modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: none;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
+}
+
+.team-card-modal-close:hover {
+  background: var(--accent-soft);
+}
+
+.team-card-modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .team-intro {
+    padding: calc(var(--header-h) + 32px) 0 48px;
+  }
+  .team-flash {
+    width: 48px;
+    height: 48px;
+  }
+  .team-card-modal-close {
+    top: -44px;
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-flash.is-popping {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .team-intro-letter.is-lit {
+    transform: none;
+  }
+}
