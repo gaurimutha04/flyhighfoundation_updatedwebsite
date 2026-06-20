@@ -57,6 +57,15 @@ Both close on backdrop click, close button click, or `Escape` key.
 
 Add `data-reveal` to any element and `site.js` will fade/slide it in when it enters the viewport. Use `data-reveal="stagger"` on a container to stagger its direct children.
 
+## Phone-first priority
+
+**~90% of visitors access this site on a phone.** Every feature, layout, and interaction must work well on mobile before desktop. When building anything new:
+- Design and test the mobile view first, then adapt for desktop
+- Touch targets must be large enough to tap (minimum ~44px)
+- Audio must not rely on page-load autoplay — iOS Safari blocks it; always trigger sound on a user gesture (tap/click) on the current page
+- Avoid hover-only interactions; anything hover-based needs a tap equivalent
+- Test modals, grids, and animations at 375px–430px width (common iPhone sizes)
+
 ## Responsive breakpoints
 
 - `980px` — nav collapses to hamburger menu

@@ -8,24 +8,24 @@
   // crawlable grid below (real text, real headings) and to look up
   // which full-size card image to show in the modal.
   const TEAM = [
-    { batch: 'Founding Team', name: 'Gauri Mutha', role: 'Founder', fact: 'I am pursuing three degrees!', memory: 'Late night workdays for the Annual events & celebrating my birthday with the students!', photo: 'images/team/gauri-mutha.jpg', card: 'images/team-cards/gauri-mutha-card.png' },
-    { batch: 'Founding Team', name: 'Swayam Shetiya', role: 'Founding Teacher', fact: 'I started driving in fifth grade!', memory: 'School visits for awareness campaigns and of course teaching the curious students!', photo: 'images/team/swayam-shetiya.jpg', card: 'images/team-cards/swayam-shetiya-card.png' },
-    { batch: 'Founding Team', name: 'Ankush Thokal', role: 'Senior Teacher', fact: "I've got a solid smash in badminton.", memory: 'Bringing smiles to kids during our cultural event and teaching them new things.', photo: 'images/team/ankush-thokal.jpg', card: 'images/team-cards/ankush-thokal-card.png' },
-    { batch: 'Founding Team', name: 'Anchal Munot', role: 'Senior Teacher', fact: 'I can stay calm even when things get chaotic!', memory: 'Making decorations, running around the city, and then watching it all come together in our events — seeing our hard work pay off fills me with pride and joy.', photo: 'images/team/anchal-munot.jpg', card: 'images/team-cards/anchal-munot-card.png' },
-    { batch: 'Founding Team', name: 'Diya Poptani', role: 'Senior Teacher', fact: 'I started driving in fifth grade!', memory: 'Fly has honestly been the best part of my life. Seeing children filled with enthusiasm not just for their studies, but also for extracurricular activities, has been truly inspiring.', photo: 'images/team/diya-poptani.jpg', card: 'images/team-cards/diya-poptani-card.png' },
+    { batch: 'Founding Team', name: 'Gauri Mutha',        role: 'Founder',         memory: 'Late night workdays for the Annual events & celebrating my birthday with the students!', card: 'images/team-cards/gauri-mutha-card.png' },
+    { batch: 'Founding Team', name: 'Swayam Shetiya',     role: 'Founding Teacher', memory: 'School visits for awareness campaigns and of course teaching the curious students!', card: 'images/team-cards/swayam-shetiya-card.png' },
+    { batch: 'Founding Team', name: 'Ankush Thokal',      role: 'Senior Teacher',   memory: 'Bringing smiles to kids during our cultural event and teaching them new things.', card: 'images/team-cards/ankush-thokal-card.png' },
+    { batch: 'Founding Team', name: 'Anchal Munot',       role: 'Senior Teacher',   memory: 'Making decorations, running around the city, and then watching it all come together in our events — seeing our hard work pay off fills me with pride and joy.', card: 'images/team-cards/anchal-munot-card.png' },
+    { batch: 'Founding Team', name: 'Diya Poptani',       role: 'Senior Teacher',   memory: 'Fly has honestly been the best part of my life. Seeing children filled with enthusiasm not just for their studies, but also for extracurricular activities, has been truly inspiring.', card: 'images/team-cards/diya-poptani-card.png' },
 
-    { batch: 'Batch 2', name: 'Radha Mutha', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/radha-mutha.jpg', card: 'images/team-cards/radha-mutha-card.png' },
-    { batch: 'Batch 2', name: 'Yuga Mutha', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/yuga-mutha.jpg', card: 'images/team-cards/yuga-mutha-card.png' },
-    { batch: 'Batch 2', name: 'Ayush Mutha', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/ayush-mutha.jpg', card: 'images/team-cards/ayush-mutha-card.png' },
-    { batch: 'Batch 2', name: 'Sujal Gandhi', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/sujal-gandhi.jpg', card: 'images/team-cards/sujal-gandhi-card.png' },
-    { batch: 'Batch 2', name: 'Aryan Munot', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/aryan-munot.jpg', card: 'images/team-cards/aryan-munot-card.png' },
-    { batch: 'Batch 2', name: 'Raj Mutha', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/raj-mutha.jpg', card: 'images/team-cards/raj-mutha-card.png' },
-    { batch: 'Batch 2', name: 'Divyanshri Munot', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/divyanshri-munot.jpg', card: 'images/team-cards/divyanshri-munot-card.png' },
+    { batch: 'Batch 2', name: 'Radha Mutha',      role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/radha-mutha-card.png' },
+    { batch: 'Batch 2', name: 'Yuga Mutha',       role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/yuga-mutha-card.png' },
+    { batch: 'Batch 2', name: 'Ayush Mutha',      role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/ayush-mutha-card.png' },
+    { batch: 'Batch 2', name: 'Sujal Gandhi',     role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/sujal-gandhi-card.png' },
+    { batch: 'Batch 2', name: 'Aryan Munot',      role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/aryan-munot-card.png' },
+    { batch: 'Batch 2', name: 'Raj Mutha',        role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/raj-mutha-card.png' },
+    { batch: 'Batch 2', name: 'Divyanshri Munot', role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/divyanshri-munot-card.png' },
 
-    { batch: 'Batch 3', name: 'Gunjan Mutha', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/gunjan-mutha.jpg', card: 'images/team-cards/gunjan-mutha-card.png' },
-    { batch: 'Batch 3', name: 'Urvee Pitale', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/urvee-pitale.jpg', card: 'images/team-cards/urvee-pitale-card.png' },
-    { batch: 'Batch 3', name: 'Prathamesh Kataria', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/prathamesh-kataria.jpg', card: 'images/team-cards/prathamesh-kataria-card.png' },
-    { batch: 'Batch 3', name: 'Riddhi', role: 'Teacher', fact: 'Ask me about my favourite subject to teach!', memory: 'Every small breakthrough moment with a student.', photo: 'images/team/riddhi.jpg', card: 'images/team-cards/riddhi-card.png' }
+    { batch: 'Batch 3', name: 'Gunjan Mutha',        role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/gunjan-mutha-card.png' },
+    { batch: 'Batch 3', name: 'Urvee Pitale',         role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/urvee-pitale-card.png' },
+    { batch: 'Batch 3', name: 'Prathamesh Kataria',   role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/prathamesh-kataria-card.png' },
+    { batch: 'Batch 3', name: 'Riddhi',               role: 'Teacher', memory: 'Every small breakthrough moment with a student.', card: 'images/team-cards/riddhi-card.png' }
   ];
 
   // ---------- Build the team grid (real, crawlable HTML) ----------
@@ -324,7 +324,17 @@
 
   if (!reduceMotion) {
     launchCelebration();
-    try { playClapping(); } catch (e) {}
+    var clapFired = false;
+    function fireClap() {
+      if (clapFired) return;
+      clapFired = true;
+      try { playClapping(); } catch (e) {}
+    }
+    // Desktop: nav-link click carries user activation, so try immediately
+    setTimeout(fireClap, 80);
+    // iOS Safari requires a gesture on this page — first tap triggers it
+    document.addEventListener('touchstart', fireClap, { once: true, passive: true });
+    document.addEventListener('click', fireClap, { once: true });
   }
 
 })();

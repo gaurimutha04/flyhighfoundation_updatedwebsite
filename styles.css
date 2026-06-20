@@ -27,7 +27,7 @@
 
   /* Layout */
   --header-h: 84px;
-  --max-w: 1240px;
+  --max-w: 1400px;
 }
 
 * {
@@ -75,7 +75,7 @@ a {
   left: 0;
   right: 0;
   height: var(--header-h);
-  background: var(--chalk-white);
+  background: #ffffff;
   border-bottom: 1px solid var(--line);
   z-index: 500;
   display: flex;
@@ -96,9 +96,10 @@ a {
 }
 
 .logo-mark img {
-  height: 52px;
+  height: 76px;
   width: auto;
   object-fit: contain;
+  clip-path: inset(0 0 0 8px);
 }
 
 .logo-mark .logo-fallback {
@@ -236,13 +237,6 @@ a {
   pointer-events: none;
 }
 
-.hero-grain {
-  position: absolute;
-  inset: 0;
-  opacity: 0.4;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-}
 
 .hero .wrap {
   position: relative;
@@ -390,19 +384,6 @@ a {
   pointer-events: none;
 }
 
-.chalk-dot {
-  position: fixed;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--chalk-white);
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  box-shadow: 0 0 8px 2px rgba(245, 241, 232, 0.5);
-}
 
 /* Eraser toggle button */
 .eraser-toggle {
@@ -1072,7 +1053,7 @@ a {
   .video-block,
   .story-layout,
   .founder-block {
-    gap: 24px;
+    gap: 32px;
   }
   .story-side {
     position: static;
@@ -1110,30 +1091,128 @@ a {
 }
 
 @media (max-width: 640px) {
-  .wrap {
-    padding: 0 20px;
+  :root {
+    --header-h: 60px;
   }
-  .founder-photo-tag {
-    left: 12px;
-    bottom: -14px;
-    padding: 10px 16px;
+  .wrap {
+    padding: 0 18px;
   }
   .section {
-    padding: 32px 0;
+    padding: 28px 0;
   }
+  /* Header & logo */
+  .logo-mark {
+    gap: 8px;
+  }
+  .logo-mark img {
+    height: 52px;
+  }
+  .logo-text {
+    font-size: 15px;
+  }
+  .logo-text span {
+    font-size: 9.5px;
+  }
+  .section-head {
+    margin-bottom: 32px;
+  }
+  .section-eyebrow {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Hero */
   .hero .wrap {
     grid-template-columns: 1fr;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 32px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 7.5vw, 40px);
+    margin-bottom: 16px;
+  }
+  .hero-lede {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    gap: 10px;
+  }
+  .btn {
+    padding: 12px 22px;
+    font-size: 14px;
   }
   .hero-visual {
-    max-width: 420px;
+    max-width: 100%;
     margin: 0 auto;
+    aspect-ratio: 16 / 9;
   }
+
+  /* Video */
+  .video-copy h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+  }
+  .video-copy p {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  .video-play-btn {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* Mission */
   .mission-grid,
   .video-block,
   .story-layout,
   .founder-block {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
+  }
+  .stat-card {
+    padding: 20px 18px;
+  }
+  .stat-card .num {
+    font-size: 30px;
+  }
+
+  /* Story */
+  .story-pullquote {
+    margin: 24px 0;
+    padding: 20px 20px;
+  }
+  .story-pullquote p {
+    font-size: 18px;
+  }
+  .timeline {
+    padding-left: 20px;
+  }
+
+  /* Founder */
+  .founder-photo-tag {
+    left: 12px;
+    bottom: -14px;
+    padding: 10px 16px;
+  }
+  .founder-quote-mark {
+    font-size: 48px;
+  }
+  .founder-copy p {
+    font-size: 16px;
+  }
+
+  /* Closing CTA */
+  .closing-cta {
+    padding: 44px 0;
+  }
+  .closing-cta h2 {
+    font-size: clamp(24px, 6.5vw, 36px);
+  }
+  .closing-cta p {
+    font-size: 15px;
+    margin-bottom: 28px;
   }
 }
 

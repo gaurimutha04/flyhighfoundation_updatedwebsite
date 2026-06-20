@@ -22,6 +22,7 @@
   let rafId = null;
   let touchDrawing = false;
 
+
   const CHALK_COLORS = [
     '245, 241, 232',  // chalk white
     '240, 193, 75',   // chalk yellow

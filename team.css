@@ -229,15 +229,54 @@
 
 @media (max-width: 640px) {
   .team-intro {
-    padding: calc(var(--header-h) + 32px) 0 48px;
+    padding: calc(var(--header-h) + 24px) 0 36px;
+  }
+  .team-intro h1 {
+    font-size: 21px;
+    margin: 10px 0 12px;
+  }
+  .team-intro p {
+    font-size: 15px;
   }
   .team-flash {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .team-grid-section {
+    padding: 36px 0 52px;
+  }
+  .team-batch-heading {
+    font-size: 19px;
+    margin: 28px 0 14px;
+  }
+  .team-batch-heading:first-child {
+    margin-top: 0;
+  }
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .team-grid-card h3 {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .team-grid-card:hover {
+    transform: none;
+  }
+
+  .team-card-modal {
+    padding: 12px;
+    align-items: flex-end;
+  }
+  .team-card-modal-content {
+    width: 100%;
   }
   .team-card-modal-close {
-    top: -44px;
+    top: -48px;
     right: 0;
+    width: 40px;
+    height: 40px;
   }
 }
 
