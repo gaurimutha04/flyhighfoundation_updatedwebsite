@@ -54,15 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
     pencilEls.forEach((el) => el.classList.add('pencil-drawn'));
   }
 
-  // Documentary video — click to play inline
+  // Documentary video — click opens YouTube (embedding disabled for this video)
   const videoFrame = document.querySelector('.video-frame');
   if (videoFrame) {
     videoFrame.addEventListener('click', function () {
       const videoId = videoFrame.getAttribute('data-video-id');
       if (!videoId) return;
-      videoFrame.innerHTML =
-        '<iframe src="https://www.youtube.com/embed/' + videoId +
-        '?autoplay=1" title="Fly High Foundation documentary" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      window.open('https://www.youtube.com/watch?v=' + videoId, '_blank', 'noopener');
     });
   }
 
