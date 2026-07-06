@@ -64,30 +64,113 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Footer media marquee — generates placeholder press cards and duplicates
-  // the set once so the continuous scroll loops seamlessly.
+  // Footer media marquee — press feature cards. By default these are
+  // placeholder cards; set MEDIA_SHEET_CSV_URL to pull real images from a
+  // published Google Sheet instead (same pattern as the donate page's
+  // campaign/donor sheets — see donate.js for the general approach).
+  // Sheet header row: image, label (label is optional). File -> Share ->
+  // Publish to web -> CSV -> paste that URL below. Add a row any time you
+  // want a new press feature to appear — no code changes needed. This
+  // loads on every page that includes site.js, so one sheet updates the
+  // marquee everywhere at once.
+  const MEDIA_SHEET_CSV_URL = '';
+
   const marqueeTrack = document.getElementById('media-marquee-track');
-  if (marqueeTrack && marqueeTrack.children.length === 0) {
-    const placeholderIcon = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 15l5-4 4 3 4-5 5 4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="8.5" r="1.4" fill="currentColor"/></svg>';
+  const placeholderIcon = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 15l5-4 4 3 4-5 5 4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="8" cy="8.5" r="1.4" fill="currentColor"/></svg>';
 
-    function buildSet() {
-      const frag = document.createDocumentFragment();
-      for (let i = 1; i <= 20; i++) {
-        const card = document.createElement('button');
-        card.type = 'button';
-        card.className = 'media-logo-card';
-        card.setAttribute('data-media-label', 'Media feature ' + i);
-        // data-media-img can be set per card once real press images are added,
-        // e.g. card.setAttribute('data-media-img', 'images/press/feature-' + i + '.jpg');
-        card.innerHTML = placeholderIcon + '<span>Media feature ' + i + '</span>';
-        frag.appendChild(card);
-      }
-      return frag;
+  function buildPlaceholderSet() {
+    const frag = document.createDocumentFragment();
+    for (let i = 1; i <= 20; i++) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'media-logo-card';
+      card.setAttribute('data-media-label', 'Media feature ' + i);
+      card.innerHTML = placeholderIcon + '<span>Media feature ' + i + '</span>';
+      frag.appendChild(card);
     }
+    return frag;
+  }
 
-    // one set to display, one duplicate set immediately after for the loop
-    marqueeTrack.appendChild(buildSet());
-    marqueeTrack.appendChild(buildSet());
+  function buildImageSet(items) {
+    const frag = document.createDocumentFragment();
+    items.forEach(function (item) {
+      const label = item.label || 'Media feature';
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'media-logo-card media-logo-card--img';
+      card.setAttribute('data-media-label', label);
+      card.setAttribute('data-media-img', item.image);
+      card.innerHTML = '<img src="' + item.image + '" alt="' + label + '" loading="lazy">';
+      frag.appendChild(card);
+    });
+    return frag;
+  }
+
+  // Minimal CSV parser (handles quoted fields containing commas), matching
+  // the one used on the donate page for its sheets.
+  function parseMediaCSV(text) {
+    const rows = [];
+    const lines = text.replace(/\r\n/g, '\n').split('\n').filter(function (l) { return l.length; });
+    for (let i = 0; i < lines.length; i++) {
+      const row = [];
+      let cur = '';
+      let inQuotes = false;
+      const line = lines[i];
+      for (let j = 0; j < line.length; j++) {
+        const ch = line[j];
+        if (inQuotes) {
+          if (ch === '"') {
+            if (line[j + 1] === '"') { cur += '"'; j++; } else { inQuotes = false; }
+          } else {
+            cur += ch;
+          }
+        } else if (ch === '"') {
+          inQuotes = true;
+        } else if (ch === ',') {
+          row.push(cur); cur = '';
+        } else {
+          cur += ch;
+        }
+      }
+      row.push(cur);
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  function fillMarqueeWithPlaceholders() {
+    marqueeTrack.appendChild(buildPlaceholderSet());
+    marqueeTrack.appendChild(buildPlaceholderSet());
+  }
+
+  if (marqueeTrack && marqueeTrack.children.length === 0) {
+    if (MEDIA_SHEET_CSV_URL) {
+      fetch(MEDIA_SHEET_CSV_URL)
+        .then(function (res) { return res.text(); })
+        .then(function (text) {
+          const rows = parseMediaCSV(text);
+          if (!rows.length) { fillMarqueeWithPlaceholders(); return; }
+
+          const headers = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+          const imageIdx = headers.indexOf('image');
+          const labelIdx = headers.indexOf('label');
+          if (imageIdx === -1) { fillMarqueeWithPlaceholders(); return; }
+
+          const items = rows.slice(1)
+            .filter(function (r) { return r[imageIdx] && r[imageIdx].trim(); })
+            .map(function (r) {
+              return { image: r[imageIdx].trim(), label: labelIdx > -1 ? r[labelIdx].trim() : '' };
+            });
+
+          if (!items.length) { fillMarqueeWithPlaceholders(); return; }
+          // one set to display, one duplicate set immediately after for the loop
+          marqueeTrack.appendChild(buildImageSet(items));
+          marqueeTrack.appendChild(buildImageSet(items));
+        })
+        .catch(fillMarqueeWithPlaceholders);
+    } else {
+      fillMarqueeWithPlaceholders();
+    }
   }
 
   // Media preview modal — opens when any marquee card is clicked

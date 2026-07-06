@@ -1,0 +1,487 @@
+/* ============================================
+   DONATE PAGE
+   Blackboard intro, a simple general-fund panel,
+   campaign cards with a chalk-drawn progress
+   bar that fills in on scroll, and a scrapbook
+   Wall of Kindness for recent supporters.
+   ============================================ */
+
+/* anchor targets for #give / #campaigns / #wall so their headings
+   don't land underneath the fixed header when jumped to directly */
+#give,
+#campaigns,
+#wall {
+  scroll-margin-top: var(--header-h);
+}
+
+/* ---------- Hero ---------- */
+
+.donate-hero {
+  position: relative;
+  background: var(--slate-deep);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(255,255,255,0.025) 0%, transparent 45%);
+  color: var(--chalk-white);
+  padding: calc(var(--header-h) + 64px) 0 72px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.donate-hero-chalk {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 3px);
+  pointer-events: none;
+}
+
+.donate-hero-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.donate-hero .section-eyebrow {
+  justify-content: center;
+  color: var(--accent-soft);
+}
+
+.donate-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.2vw, 60px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 16px 0 20px;
+}
+
+.donate-hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.donate-hero-lede {
+  font-size: 17.5px;
+  color: rgba(245, 241, 232, 0.8);
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+.donate-hero .hero-actions {
+  justify-content: center;
+}
+
+.btn-ghost--dark {
+  border-color: rgba(28, 43, 51, 0.28);
+  color: var(--ink);
+}
+
+.btn-ghost--dark:hover {
+  border-color: var(--ink);
+  background: rgba(28, 43, 51, 0.06);
+}
+
+/* ---------- Ways to give ---------- */
+
+.give-panel {
+  max-width: 620px;
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 32px 36px;
+  box-shadow: 0 14px 34px rgba(22, 49, 63, 0.08);
+}
+
+.give-simple-copy {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+.give-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.give-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--accent);
+  color: var(--slate-deep);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.give-action-btn:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.give-action-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.give-action-btn--secondary {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+
+.give-action-btn--secondary:hover {
+  border-color: var(--accent-deep);
+  background: var(--paper-dim);
+}
+
+/* ---------- Campaign cards ---------- */
+
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+  gap: 28px;
+  justify-content: start;
+}
+
+.campaign-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+
+.campaign-card.is-complete {
+  border-top-color: #1f7a4c;
+}
+
+.campaign-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(22, 49, 63, 0.14);
+}
+
+.campaign-card.is-highlighted {
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 3px rgba(240, 193, 75, 0.35);
+}
+
+.campaign-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.campaign-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.25;
+  min-height: 2.5em;
+  display: flex;
+  align-items: flex-start;
+}
+
+.campaign-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: #fdeecb;
+  color: var(--accent-deep);
+  white-space: nowrap;
+}
+
+.campaign-badge--done {
+  background: #dff2e6;
+  color: #1f7a4c;
+}
+
+.campaign-tagline {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  min-height: 2.9em;
+}
+
+.campaign-progress-track {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.campaign-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+  transition: width 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.campaign-card.is-complete .campaign-progress-fill {
+  background: linear-gradient(90deg, #1f7a4c, #3fae74);
+}
+
+.campaign-card.is-revealed .campaign-progress-fill {
+  width: var(--target-pct, 0%);
+}
+
+.campaign-stats {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.campaign-raised {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--slate-deep);
+}
+
+.campaign-goal {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.campaign-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+
+.campaign-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.campaign-donate-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 18px;
+  border-radius: 6px;
+  background: var(--slate-deep);
+  color: var(--chalk-white);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14.5px;
+  line-height: 1.4;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.campaign-donate-btn:hover {
+  background: var(--slate-mid);
+  transform: translateY(-2px);
+}
+
+.campaign-card.is-complete .campaign-donate-btn {
+  background: #1f7a4c;
+  cursor: default;
+}
+
+.campaign-card.is-complete .campaign-donate-btn:hover {
+  transform: none;
+  background: #1f7a4c;
+}
+
+.campaign-share-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.campaign-share-btn:hover {
+  border-color: var(--accent-deep);
+  background: var(--paper-dim);
+}
+
+.campaign-share-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Wall of Kindness ---------- */
+
+.wall-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.donor-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid rgba(28, 43, 51, 0.1);
+  border-radius: 6px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 12px rgba(22, 49, 63, 0.08);
+  font-family: 'Caveat', var(--font-display), cursive;
+}
+
+.donor-tag:nth-child(3n) { transform: rotate(-1.4deg); }
+.donor-tag:nth-child(3n+1) { transform: rotate(1deg); }
+.donor-tag:nth-child(3n+2) { transform: rotate(-0.4deg); }
+
+.donor-tag-name {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--slate-deep);
+}
+
+.donor-tag-amount {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+/* bounded, centered placeholder for the donor wall / campaigns grid when
+   there's nothing to show yet — avoids a couple of lines of text
+   floating in a lot of empty space */
+.empty-state-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 12px auto;
+  text-align: center;
+  padding: 40px 32px;
+  background: #fff;
+  border: 1.5px dashed rgba(28, 43, 51, 0.2);
+  border-radius: 10px;
+}
+
+.empty-state-card svg {
+  width: 38px;
+  height: 38px;
+  color: var(--accent-deep);
+  opacity: 0.75;
+  margin-bottom: 14px;
+}
+
+.empty-state-card p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0;
+}
+
+.wall-toggle-wrap {
+  text-align: center;
+  margin-top: 28px;
+}
+
+/* ---------- Share toast ---------- */
+
+.share-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 16px);
+  background: var(--slate-deep);
+  color: var(--chalk-white);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 13px 22px;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 600;
+}
+
+.share-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 980px) {
+  .campaigns-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .donate-hero {
+    padding: calc(var(--header-h) + 28px) 0 44px;
+  }
+  .donate-hero-lede {
+    font-size: 15.5px;
+  }
+  .give-panel {
+    max-width: 100%;
+    padding: 24px 20px;
+  }
+  .campaign-card {
+    padding: 20px;
+  }
+  .campaign-title {
+    font-size: 18px;
+  }
+  .donor-tag-name {
+    font-size: 19px;
+  }
+  .wall-board {
+    gap: 10px;
+  }
+  .empty-state-card {
+    padding: 32px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaign-progress-fill {
+    transition: none;
+  }
+}

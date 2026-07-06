@@ -45,6 +45,19 @@ All colors, fonts, and layout values live in `:root` in `styles.css`. Always use
 
 Each member object: `{ batch, name, role, fact, memory, photo, card }`. Batches are `'Founding Team'`, `'Batch 2'`, `'Batch 3'`.
 
+## Donate page data
+
+`donate.js` holds two arrays that back the donate page: `CAMPAIGNS` (campaign cards, progress bars, "Done" state) and `DONORS` (the "Wall of Kindness" board, last 30 days by default with a toggle to view all-time). By default they're hand-edited, same pattern as `team.js`'s `TEAM` array — but both can instead be driven live by a published Google Sheet, so campaigns and donors can be managed without touching code or pushing:
+
+- `CAMPAIGN_SHEET_CSV_URL` — sheet columns: `id, title, tagline, goal, raised, status, deadline, donateLink`. Once set, fully replaces the sample `CAMPAIGNS` array. A donor-sheet row's `campaignId` (see below) adds its amount on top of a campaign's baseline `raised` automatically; `status` is never flipped to `completed` automatically, so that stays a deliberate edit in the sheet.
+- `DONOR_SHEET_CSV_URL` — sheet columns: `name, amount, date, campaignId`. Once set, fully replaces the sample `DONORS` array (which is empty by default so nothing fake ever shows).
+
+Both fetches run over plain `fetch()` + a small built-in CSV parser (no dependencies), and both fail soft — if the sheet is unreachable or misconfigured, the page falls back to the in-code array rather than breaking. Note: this fetch only works when the page is served over http(s) (e.g. `npx serve .`) — opening the file directly (`file://`) gets a browser CORS block from Google's null-origin policy, not a code bug.
+
+`PAYMENT_CONFIG` at the top of `donate.js` holds optional payment links (`razorpayLink`, `upiId`, `paypalMeLink`). Each donate button only renders once its field is filled in; a WhatsApp-based donate flow (using the existing footer number) is always available as a zero-setup fallback.
+
+For the fully hands-off version — no manual sheet-row entry either — pair `DONOR_SHEET_CSV_URL` with a Zapier/Make automation triggered by the payment gateway to append a row after each donation. Full setup steps for both sheets are in the comment block at the top of `donate.js`.
+
 ## Modals
 
 Two modal patterns exist, both using the same `.is-open` / `aria-hidden` toggle approach:

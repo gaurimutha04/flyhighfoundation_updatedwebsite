@@ -490,7 +490,7 @@ a {
 }
 
 .section-eyebrow {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
   font-size: 13px;
@@ -1655,6 +1655,19 @@ a {
   height: 26px;
   opacity: 0.5;
   color: var(--accent-soft);
+}
+
+/* when a card is backed by a real image from the media sheet, fill the
+   whole card with it instead of the placeholder icon layout */
+.media-logo-card--img {
+  padding: 0;
+  overflow: hidden;
+}
+
+.media-logo-card--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .media-logo-card span {
